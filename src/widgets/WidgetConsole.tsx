@@ -165,8 +165,7 @@ export function WidgetConsole({
       }} />
       <Particles key={particleCount} heat={heat} dark={true} count={particleCount} energy={energy} />
 
-      {/* Centered horizontal menu pill */}
-      <Menu mode={menu} />
+      {/* <Menu mode={menu} /> */}
 
       {/* Top chrome — draggable bar */}
       <div
