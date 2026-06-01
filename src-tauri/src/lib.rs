@@ -1,7 +1,7 @@
 mod temps;
 
 use tauri::{
-    menu::{Menu, MenuItem},
+    menu::{CheckMenuItem, Menu, MenuItem, PredefinedMenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
     Manager, State,
 };
@@ -10,6 +10,8 @@ use temps::{ComponentInfo, TempReader, Temps};
 struct AppState {
     reader: TempReader,
 }
+
+struct AlwaysOnTopItem(CheckMenuItem<tauri::Wry>);
 
 #[tauri::command]
 fn get_temps(state: State<AppState>) -> Temps {
@@ -41,8 +43,12 @@ pub fn run() {
             }
 
             let show = MenuItem::with_id(app, "show", "Mostra", true, None::<&str>)?;
+            let aot = CheckMenuItem::with_id(app, "always_on_top", "Sempre in primo piano", true, false, None::<&str>)?;
+            let sep = PredefinedMenuItem::separator(app)?;
             let quit = MenuItem::with_id(app, "quit", "Esci", true, None::<&str>)?;
-            let menu = Menu::with_items(app, &[&show, &quit])?;
+            let menu = Menu::with_items(app, &[&show, &aot, &sep, &quit])?;
+
+            app.manage(AlwaysOnTopItem(aot));
 
             TrayIconBuilder::new()
                 .icon(app.default_window_icon().unwrap().clone())
@@ -52,6 +58,14 @@ pub fn run() {
                         if let Some(win) = app.get_webview_window("main") {
                             let _ = win.show();
                             let _ = win.set_focus();
+                        }
+                    }
+                    "always_on_top" => {
+                        if let Some(win) = app.get_webview_window("main") {
+                            let is_aot = win.is_always_on_top().unwrap_or(false);
+                            let _ = win.set_always_on_top(!is_aot);
+                            let item = app.state::<AlwaysOnTopItem>();
+                            let _ = item.0.set_checked(!is_aot);
                         }
                     }
                     "quit" => app.exit(0),
