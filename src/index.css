@@ -1,0 +1,56 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  border-radius: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.22);
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes fv-blobA {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(7%, -9%) scale(1.18); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes fv-blobB {
+  0%   { transform: translate(0, 0) scale(1.1); }
+  50%  { transform: translate(-9%, 6%) scale(0.92); }
+  100% { transform: translate(0, 0) scale(1.1); }
+}
+@keyframes fv-blobC {
+  0%   { transform: translate(0, 0) scale(0.95); }
+  50%  { transform: translate(5%, 8%) scale(1.12); }
+  100% { transform: translate(0, 0) scale(0.95); }
+}
+@keyframes fv-bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+
+.fv-spark-wave {
+  animation: fv-bob var(--wave-dur, 9s) ease-in-out infinite;
+}
