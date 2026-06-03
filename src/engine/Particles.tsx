@@ -35,28 +35,56 @@ export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps
 
     for (let i = 0; i < count; i++) {
       ps.push({
-        x: Math.random() * w, y: Math.random() * h,
+        x: Math.random() * w,
+        y: Math.random() * h,
         r: 0.6 + Math.random() * 1.8,
-        sp: 0.15 + Math.random() * 0.5,
-        drift: (Math.random() - 0.5) * 0.3,
-        a: 0.1 + Math.random() * 0.4,
+        sp: 0.3 + Math.random() * 0.7,       // per-particle speed variance
+        drift: (Math.random() - 0.5) * 2,    // per-particle horizontal direction
+        a: 0.1 + Math.random() * 0.45,
       });
     }
 
+    // smooth cubic interpolation
+    const smoothstep = (e0: number, e1: number, x: number) => {
+      const t = Math.max(0, Math.min(1, (x - e0) / (e1 - e0)));
+      return t * t * (3 - 2 * t);
+    };
+
     const loop = () => {
       ctx.clearRect(0, 0, w, h);
-      const sp = (0.4 + heatRef.current * 1.7) * (0.45 + enRef.current * 1.1);
+      const ht = heatRef.current;
+      const en = enRef.current;
+
+      // Speed: near-zero when cold (snow drift), very fast when hot (embers)
+      const baseSpeed = (0.04 + ht * ht * 3.2) * (0.5 + en * 0.8);
+
+      // Direction: +1 = falling (snow, cold), -1 = rising (embers, hot)
+      // Transition window: heat 0.12 → 0.36
+      const dir = 1 - smoothstep(0.12, 0.36, ht) * 2;
+
+      // Drift: tight for snow, wide/chaotic for embers
+      const driftScale = (0.08 + ht * 1.8) * en;
+
+      // Particle size: bigger snowflakes when cold, smaller embers when hot
+      const rScale = 1 + (1 - ht) * 0.8;
+
+      // Color: cold = blue-white (snow), hot = orange-ember
+      const cr = Math.round(215 + ht * 40);    // 215 → 255
+      const cg = Math.round(230 - ht * 60);    // 230 → 170
+      const cb = Math.round(255 - ht * 200);   // 255 → 55
+
       for (const p of ps) {
-        p.y -= p.sp * sp;
-        p.x += p.drift * sp;
-        if (p.y < -4) { p.y = h + 4; p.x = Math.random() * w; }
-        if (p.x < -4) p.x = w + 4;
+        p.y += dir * p.sp * baseSpeed;
+        p.x += p.drift * driftScale;
+
+        if (p.y > h + 4) { p.y = -4;   p.x = Math.random() * w; }
+        if (p.y < -4)    { p.y = h + 4; p.x = Math.random() * w; }
+        if (p.x < -4)    p.x = w + 4;
         if (p.x > w + 4) p.x = -4;
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, 6.283);
-        ctx.fillStyle = dark
-          ? `rgba(220,235,255,${p.a})`
-          : `rgba(255,255,255,${p.a * 1.3})`;
+        ctx.arc(p.x, p.y, p.r * rScale, 0, 6.283);
+        ctx.fillStyle = `rgba(${cr},${cg},${cb},${p.a})`;
         ctx.fill();
       }
       raf = requestAnimationFrame(loop);
@@ -73,7 +101,7 @@ export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps
   return (
     <canvas
       ref={ref}
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 2 }}
     />
   );
 }
