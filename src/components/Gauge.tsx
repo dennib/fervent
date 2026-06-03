@@ -1,4 +1,3 @@
-import React from "react";
 import { tempHue, tempBand, fmtTemp } from "../engine/helpers";
 
 interface GaugeRingProps {

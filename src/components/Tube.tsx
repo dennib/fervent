@@ -1,4 +1,3 @@
-import React from "react";
 import { fmtTemp } from "../engine/helpers";
 
 interface TubeProps {
@@ -20,7 +19,7 @@ export function Tube({ label, c, unit, hue }: TubeProps) {
         <span style={{ fontFamily: '"Helvetica Neue", sans-serif', fontWeight: 300, fontSize: 26, color: "#fff", letterSpacing: -0.5, fontVariantNumeric: "tabular-nums" }}>
           {fmtTemp(c, unit)}
         </span>
-        <span style={{ fontFamily: '"Helvetica Neue", sans-serif', fontWeight: 300, fontSize: 12, color: "rgba(255,255,255,0.5)" }}>°{unit}</span>
+      <span style={{ fontFamily: '"Helvetica Neue", sans-serif', fontWeight: 300, fontSize: 12, color: "rgba(255,255,255,0.5)" }}>°{unit}</span>
       </div>
       <div style={{
         position: "relative", width: 52, height: 130, borderRadius: 26, overflow: "hidden",

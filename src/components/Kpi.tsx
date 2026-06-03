@@ -1,4 +1,3 @@
-import React from "react";
 import { SparkLine } from "../engine/spark-line";
 import { fmtTemp, heatNorm } from "../engine/helpers";
 

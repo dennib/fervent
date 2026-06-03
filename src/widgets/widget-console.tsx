@@ -5,7 +5,7 @@ import { Atmosphere } from "../engine/atmosphere";
 import { Particles } from "../engine/particles";
 import { tempHue, tempBand, heatNorm } from "../engine/helpers";
 import { UnitToggle } from "../components/unit-toggle";
-import { Menu } from "../components/menu";
+// import { Menu } from "../components/menu";
 import { GlassCard, CardTitle } from "../components/glass-card";
 import { Gauge } from "../components/gauge";
 import { Tube } from "../components/tube";
@@ -82,7 +82,7 @@ export function WidgetConsole({
   mood = "notturno",
   reading = "numeri",
   energy = 0.6,
-  menu = "alto",
+  // menu = "alto",
 }: WidgetConsoleProps) {
   const { cpuC, gpuC, cpuHist, gpuHist } = useHeat();
   const [unit, setUnit] = useState<"C" | "F">("C");
