@@ -7,7 +7,12 @@ interface ParticlesProps {
   energy?: number;
 }
 
-export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps) {
+export function Particles({
+  heat,
+  dark,
+  count = 34,
+  energy = 1,
+}: ParticlesProps) {
   const ref = useRef<HTMLCanvasElement>(null);
   const heatRef = useRef(heat);
   const enRef = useRef(energy);
@@ -19,16 +24,26 @@ export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps
     if (!cv) return;
     const ctx = cv.getContext("2d")!;
     let raf: number;
-    let w = 0, h = 0;
+    let w = 0,
+      h = 0;
     const dpr = Math.min(2, window.devicePixelRatio || 1);
 
-    interface Particle { x: number; y: number; r: number; sp: number; drift: number; a: number; }
+    interface Particle {
+      x: number;
+      y: number;
+      r: number;
+      sp: number;
+      drift: number;
+      a: number;
+    }
     const ps: Particle[] = [];
 
     const resize = () => {
       const r = cv.getBoundingClientRect();
-      w = r.width; h = r.height;
-      cv.width = w * dpr; cv.height = h * dpr;
+      w = r.width;
+      h = r.height;
+      cv.width = w * dpr;
+      cv.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
@@ -38,8 +53,8 @@ export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps
         x: Math.random() * w,
         y: Math.random() * h,
         r: 0.6 + Math.random() * 1.8,
-        sp: 0.3 + Math.random() * 0.7,       // per-particle speed variance
-        drift: (Math.random() - 0.5) * 2,    // per-particle horizontal direction
+        sp: 0.3 + Math.random() * 0.7, // per-particle speed variance
+        drift: (Math.random() - 0.5) * 2, // per-particle horizontal direction
         a: 0.1 + Math.random() * 0.45,
       });
     }
@@ -69,17 +84,23 @@ export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps
       const rScale = 1 + (1 - ht) * 0.8;
 
       // Color: cold = blue-white (snow), hot = orange-ember
-      const cr = Math.round(215 + ht * 40);    // 215 → 255
-      const cg = Math.round(230 - ht * 60);    // 230 → 170
-      const cb = Math.round(255 - ht * 200);   // 255 → 55
+      const cr = Math.round(215 + ht * 40); // 215 → 255
+      const cg = Math.round(230 - ht * 60); // 230 → 170
+      const cb = Math.round(255 - ht * 200); // 255 → 55
 
       for (const p of ps) {
         p.y += dir * p.sp * baseSpeed;
         p.x += p.drift * driftScale;
 
-        if (p.y > h + 4) { p.y = -4;   p.x = Math.random() * w; }
-        if (p.y < -4)    { p.y = h + 4; p.x = Math.random() * w; }
-        if (p.x < -4)    p.x = w + 4;
+        if (p.y > h + 4) {
+          p.y = -4;
+          p.x = Math.random() * w;
+        }
+        if (p.y < -4) {
+          p.y = h + 4;
+          p.x = Math.random() * w;
+        }
+        if (p.x < -4) p.x = w + 4;
         if (p.x > w + 4) p.x = -4;
 
         ctx.beginPath();
@@ -101,7 +122,14 @@ export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps
   return (
     <canvas
       ref={ref}
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 2 }}
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+        zIndex: 3,
+      }}
     />
   );
 }
