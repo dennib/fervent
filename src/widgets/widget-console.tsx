@@ -22,7 +22,7 @@ const BANDS = ["cold", "cool", "warm", "hot"] as const;
 const BAND_SRC: Record<string, string> = {
   cold: "/assets/cold-mountains.jpg",
   cool: "/assets/cool-forest.jpg",
-  warm: "/assets/warm-beach.jpg",
+  warm: "/assets/namibia.jpg",
   hot:  "/assets/hot-lava.jpg",
 };
 
