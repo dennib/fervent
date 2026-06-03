@@ -19,5 +19,15 @@ serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
 tauri = { version = "2", features = ["tray-icon"] }
 tauri-plugin-log = "2"
-sysinfo = "0.33"
+
+# Windows-only: WMI sensor fallback
+[target.'cfg(target_os = "windows")'.dependencies]
 wmi = "0.14"
+
+# Linux-only: hwmon temperature via /sys/class/hwmon
+[target.'cfg(target_os = "linux")'.dependencies]
+sysinfo = "0.33"
+
+# macOS-only: SMC/IOKit temperature reading (FFI — no extra native deps)
+[target.'cfg(target_os = "macos")'.dependencies]
+libc = "0.2"

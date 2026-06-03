@@ -1,0 +1,3 @@
+// Windows resource script — embeds the UAC manifest into the executable.
+// Compiled by embed-resource in build.rs.
+1 24 "app.manifest"
