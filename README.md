@@ -23,7 +23,7 @@
 <br>
 
 <p align="center">
-  <img src="design/screenshots/hero.png" width="720" alt="Fervent" />
+  <img src="public/screenshots/hero.png" width="720" alt="Fervent" />
 </p>
 
 <br>

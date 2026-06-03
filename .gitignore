@@ -1,4 +1,5 @@
 node_modules/
+design/
 dist/
 .yarn/cache
 .yarn/install-state.gz
