@@ -179,11 +179,7 @@ export function WidgetConsole({
       >
         {/* Logo — left */}
         <div data-tauri-drag-region style={{ display: "flex", alignItems: "center", gap: 8, pointerEvents: "none" }}>
-          <div style={{ width: 22, height: 22, borderRadius: 7, background: "linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5))", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="#0a1220" strokeWidth="1.4" strokeLinecap="round">
-              <path d="M1.5 8q2.5-3 5-0t5-0" /><path d="M1.5 4.5q2.5-3 5-0t5-0" opacity="0.5" />
-            </svg>
-          </div>
+          <img src="/brand/Fervent-icon.svg" alt="Fervent" style={{ width: 26, height: 26, borderRadius: 8, flexShrink: 0, display: "block" }} />
           <span style={{ fontWeight: 600, fontSize: 16, letterSpacing: -0.2 }}>Fervent</span>
         </div>
 
