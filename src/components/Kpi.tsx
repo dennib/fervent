@@ -1,5 +1,5 @@
 import React from "react";
-import { SparkLine } from "../engine/SparkLine";
+import { SparkLine } from "../engine/spark-line";
 import { fmtTemp, heatNorm } from "../engine/helpers";
 
 interface KpiProps {

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { useHeat } from "../engine/HeatProvider";
-import { Atmosphere } from "../engine/Atmosphere";
-import { Particles } from "../engine/Particles";
+import { useHeat } from "../engine/heat-provider";
+import { Atmosphere } from "../engine/atmosphere";
+import { Particles } from "../engine/particles";
 import { tempHue, tempBand, heatNorm } from "../engine/helpers";
-import { UnitToggle } from "../components/UnitToggle";
-import { Menu } from "../components/Menu";
-import { GlassCard, CardTitle } from "../components/GlassCard";
-import { Gauge } from "../components/Gauge";
-import { Tube } from "../components/Tube";
-import { Kpi } from "../components/Kpi";
+import { UnitToggle } from "../components/unit-toggle";
+import { Menu } from "../components/menu";
+import { GlassCard, CardTitle } from "../components/glass-card";
+import { Gauge } from "../components/gauge";
+import { Tube } from "../components/tube";
+import { Kpi } from "../components/kpi";
 import type { AtmosferaMood, ReadingMode, MenuMode } from "../types";
 
 const MOODS: Record<AtmosferaMood, { bg: string; atm: number; card: { bg: string; blur: number; border: number } }> = {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { HeatProvider } from "./engine/HeatProvider";
-import { WidgetConsole } from "./widgets/WidgetConsole";
+import { HeatProvider } from "./engine/heat-provider";
+import { WidgetConsole } from "./widgets/widget-console";
 
 function DebugSensors() {
   useEffect(() => {
