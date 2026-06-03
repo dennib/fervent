@@ -55,8 +55,8 @@ export function Particles({ heat, dark, count = 34, energy = 1 }: ParticlesProps
       const ht = heatRef.current;
       const en = enRef.current;
 
-      // Speed: near-zero when cold (snow drift), very fast when hot (embers)
-      const baseSpeed = (0.04 + ht * ht * 3.2) * (0.5 + en * 0.8);
+      // Speed: slow but visible when cold (snow), very fast when hot (embers)
+      const baseSpeed = (0.35 + ht * ht * ht * 3.8) * (0.5 + en * 0.8);
 
       // Direction: +1 = falling (snow, cold), -1 = rising (embers, hot)
       // Transition window: heat 0.12 → 0.36
