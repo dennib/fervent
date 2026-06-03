@@ -178,9 +178,8 @@ export function WidgetConsole({
         }}
       >
         {/* Logo — left */}
-        <div data-tauri-drag-region style={{ display: "flex", alignItems: "center", gap: 8, pointerEvents: "none" }}>
-          <img src="/brand/Fervent-icon.svg" alt="Fervent" style={{ width: 26, height: 26, borderRadius: 8, flexShrink: 0, display: "block" }} />
-          <span style={{ fontWeight: 600, fontSize: 16, letterSpacing: -0.2 }}>Fervent</span>
+        <div data-tauri-drag-region style={{ display: "flex", alignItems: "center", pointerEvents: "none" }}>
+          <img src="/brand/Fervent-lockup-light.svg" alt="Fervent" style={{ height: 26, width: "auto", display: "block" }} />
         </div>
 
         {/* Right — unit toggle + window controls; stop drag propagation */}
